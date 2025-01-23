@@ -1,0 +1,22 @@
+{
+  "name": "@rpgmadesimple/foundry-vite-plugin",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prepare": "tsc",
+    "watch": "tsc --watch",
+    "lint": "eslint . && prettier --check .",
+    "fix": "eslint . --fix && prettier --write ."
+  },
+  "dependencies": {
+    "vite": "6.0.11"
+  },
+  "devDependencies": {
+    "@rpgmadesimple/tsconfig": "workspace:*",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

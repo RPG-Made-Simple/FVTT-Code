@@ -1,0 +1,10 @@
+{
+  "extends": "@rpgmadesimple/tsconfig/foundry.json",
+  "include": ["./src", "./vite.config.ts"],
+  "exclude": ["node_modules"],
+  "references": [
+    {
+      "path": "./src"
+    }
+  ]
+}

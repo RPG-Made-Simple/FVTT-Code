@@ -1,0 +1,22 @@
+{
+  "name": "@rpgmadesimple/debugger",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint . && prettier --check .",
+    "fix": "eslint . --fix && prettier --write ."
+  },
+  "devDependencies": {
+    "@rpgmadesimple/foundry-vite-plugin": "workspace:*",
+    "@rpgmadesimple/tsconfig": "workspace:*",
+    "@rpgmadesimple/utils": "workspace:*",
+    "fvtt-types": "League-of-Foundry-Developers/foundry-vtt-types#main",
+    "sass": "^1.83.0",
+    "ts-node": "^10.9.2",
+    "ts-patch": "^3.3.0",
+    "ts-runtime-checks": "^0.6.3",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.4"
+  }
+}

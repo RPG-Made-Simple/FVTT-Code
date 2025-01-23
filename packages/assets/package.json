@@ -1,0 +1,17 @@
+{
+  "name": "@rpgmadesimple/assets",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "lint": "eslint . && prettier --check .",
+    "fix": "eslint . --fix && prettier --write ."
+  },
+  "devDependencies": {
+    "@rpgmadesimple/eslint-config": "workspace:*",
+    "@rpgmadesimple/tsconfig": "workspace:*",
+    "eslint": "^9.17.0",
+    "vue": "^3.5.13"
+  }
+}

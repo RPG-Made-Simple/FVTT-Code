@@ -1,0 +1,10 @@
+{
+  "extends": "@rpgmadesimple/tsconfig/foundry.json",
+  "include": ["."],
+  "exclude": ["node_modules"],
+  "references": [
+    {
+      "path": "./src"
+    }
+  ]
+}

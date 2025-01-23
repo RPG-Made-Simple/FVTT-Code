@@ -1,0 +1,5 @@
+{
+  "extends": "@rpgmadesimple/tsconfig/base.json",
+  "include": [".", "icons.d.ts", ".eslintrc.js"],
+  "exclude": ["dist", "build", "node_modules"]
+}

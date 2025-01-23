@@ -1,0 +1,12 @@
+{
+  "name": "@rpgmadesimple/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@vue/tsconfig": "^0.7.0",
+    "foundry-vtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main"
+  }
+}
