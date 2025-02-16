@@ -13,3 +13,5 @@ Hooks.once('ready', () => {
 
   Hooks.call('debugger.ready');
 });
+
+export { Debugger };
