@@ -10,7 +10,7 @@ const OptionalBooleanSchema = { type: ["boolean", "null", "undefined"] };
 
 export class Debugger {
   static SHOULD_DEBUG: boolean = true;
-  static debuggers: Array<Debugger> = [];
+  private static debuggers: Array<Debugger> = [];
 
   /** Which module is this Debugger from */
   private module: string;
@@ -64,8 +64,8 @@ export class Debugger {
   constructor(
     module: string,
     prefix: string,
-    shouldDebug: boolean | null | undefined,
-    shouldSave: boolean | null | undefined
+    shouldDebug?: boolean,
+    shouldSave?: boolean
   ) {
     Misc.validate(
       { module, prefix, shouldDebug, shouldSave },

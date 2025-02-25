@@ -2,6 +2,7 @@
   "name": "@rpgmadesimple/debugger",
   "version": "0.0.0",
   "type": "module",
+  "types": "./src/types.ts",
   "scripts": {
     "build": "vite build",
     "lint": "eslint . && prettier --check .",
@@ -11,7 +12,6 @@
     "@rpgmadesimple/foundry-vite-plugin": "workspace:*",
     "@rpgmadesimple/tsconfig": "workspace:*",
     "@rpgmadesimple/utils": "workspace:*",
-    "@rpgmadesimple/types": "workspace:*",
     "fvtt-types": "League-of-Foundry-Developers/foundry-vtt-types#main",
     "sass": "^1.83.0",
     "ts-node": "^10.9.2",
