@@ -3,15 +3,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "build": "vite build",
     "lint": "eslint . && prettier --check .",
     "fix": "eslint . --fix && prettier --write ."
   },
   "devDependencies": {
-    "fvtt-types": "League-of-Foundry-Developers/foundry-vtt-types#main",
+    "@rpgmadesimple/foundry-vite-plugin": "workspace:*",
     "@rpgmadesimple/tsconfig": "workspace:*",
     "@rpgmadesimple/utils": "workspace:*",
-    "@rpgmadesimple/foundry-vite-plugin": "workspace:*",
+    "@rpgmadesimple/debugger": "workspace:*",
+    "fvtt-types": "League-of-Foundry-Developers/foundry-vtt-types#main",
     "sass": "^1.83.0",
+    "ts-runtime-checks": "^0.6.3",
     "typescript": "^5.7.2",
     "vite": "^6.0.4"
   }

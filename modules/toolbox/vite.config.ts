@@ -6,7 +6,7 @@ export default defineConfig({
     FoundryPlugin({
       module: {
         id: 'toolbox',
-        title: '🛠️ Toolbox (Library)',
+        title: '🧰 Toolbox (Library)',
         description: 'Library that adds common utilities.',
         version: '2.0.0',
         library: true,
