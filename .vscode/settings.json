@@ -1,0 +1,11 @@
+{
+  "editor.rulers": [80],
+  "rewrap.wrappingColumn": 80,
+  "rewrap.autoWrap.enabled": true,
+  "[markdown]": {
+    "editor.wordWrapColumn": 80,
+  },
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+}

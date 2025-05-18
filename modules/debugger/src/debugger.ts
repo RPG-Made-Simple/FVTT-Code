@@ -164,7 +164,9 @@ export class Debugger {
    */
   async dump(): Promise<void> {
     if (
+      // @ts-ignore
       game.permissions?.FILES_BROWSE.includes(game.user?.role ?? 0) &&
+      // @ts-ignore
       game.permissions.FILES_UPLOAD.includes(game.user?.role ?? 0)
     ) {
       if (!(await FoundryFileSystem.ensure("./debugger"))) {

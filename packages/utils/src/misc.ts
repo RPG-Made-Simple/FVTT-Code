@@ -72,23 +72,33 @@ export function argStringfy(...params: Array<unknown>): string {
 }
 
 /**
- * Prepares everything to attach the `namespace` into the API.
- * @param namespace The name that will be used to access the API methods (must be a string).
- * @param register The object that will be registered under the namespace.
+ * Prepares everything to attach the API into a module.
+ * @param moduleId The module that will contain the API.
+ * @param register What will be accessible at the API.
  */
-export function prepareForAPI(namespace: string, register: unknown): void {
+export function prepareForAPI(moduleId: string, register: unknown): void {
   // Validate the inputs
   const schema = {
-    namespace: 'string',
+    moduleId: 'string',
     register: 'any',
   };
 
-  validate({ namespace, register }, schema);
+  validate({ moduleId, register }, schema);
 
-  // Attach the namespace to the global API object
-  let apiRoot = (window as any)["RMS"];
-  if (!apiRoot) {
-    apiRoot = (window as any)["RMS"] = {};
+  const module = game.modules?.get(moduleId);
+  if (module !== undefined) {
+    // @ts-ignore
+    module['api'] = register;
   }
-  apiRoot[namespace] = register;
+}
+
+/**
+ * Wrapper to get game.
+ * @returns game instance.
+ */
+export function getGame(): Game {
+  if(!(game instanceof Game)) {
+    throw new Error('game is not initialized yet!');
+  }
+  return game;
 }

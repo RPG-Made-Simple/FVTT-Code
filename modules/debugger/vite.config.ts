@@ -13,7 +13,7 @@ export default defineConfig({
         authors: [
           {
             name: 'ZotyDev',
-            email: 'official@zoty.dev',
+            email: 'zotydev@gmail.com',
             url: 'https://zoty.dev',
             discord: 'zotydev',
           },
