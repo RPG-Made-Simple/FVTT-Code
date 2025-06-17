@@ -3,9 +3,11 @@
   "ui": "tui",
   "tasks": {
     "prepare": {
+      "cache": true,
       "inputs": ["$TURBO_DEFAULT$", ".env"]
     },
     "build": {
+      "cache": true,
       "dependsOn": ["^build", "prepare"],
       "inputs": ["$TURBO_DEFAULT$", ".env"]
     },
@@ -16,8 +18,13 @@
       "inputs": ["$TURBO_DEFAULT$", ".env"]
     },
     "lint": { },
-    "test": { },
     "fix": {
+      "cache": false
+    },
+    "test:unit": {
+      "cache": false
+    },
+    "coverage": {
       "cache": false
     }
   }

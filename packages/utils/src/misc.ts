@@ -11,6 +11,7 @@ function validateType(value: unknown, type: string): boolean {
   if (type === 'number') return typeof value === 'number';
   if (type === 'array') return Array.isArray(value);
   if (type === 'undefined') return value === undefined;
+  if (type === 'function') return typeof value === 'function';
   if (type === 'any') return true;
   return false;
 }
@@ -23,7 +24,7 @@ function validateType(value: unknown, type: string): boolean {
  */
 export function validate(
   obj: Record<string, unknown>,
-  schema: Record<string, string | string[]> // Permite tipos múltiplos para cada propriedade.
+  schema: Record<string, string | string[]>
 ): void {
   for (const key in schema) {
     const expectedType = schema[key];
@@ -32,7 +33,7 @@ export function validate(
     const isValid = types.some((type) => validateType(obj[key], type ?? 'undefined'));
 
     if (!isValid) {
-      throw new Error(
+      throw new TypeError(
         `Invalid type for property "${key}". Expected ${types.join(" | ")}, got ${typeof obj[key]}.`
       );
     }
@@ -94,11 +95,29 @@ export function prepareForAPI(moduleId: string, register: unknown): void {
 
 /**
  * Wrapper to get game.
- * @returns game instance.
+ * @returns The game instance.
+ * @throws If the game is not yet initialized.
  */
 export function getGame(): Game {
   if(!(game instanceof Game)) {
     throw new Error('game is not initialized yet!');
   }
   return game;
+}
+
+/**
+ * A helper that receives optional implementations for different FoundryVTT
+ * versions and handle the switch between implementations.
+ * @param switchSchema `object` containing the version => callback schema.
+ * @param args The arguments that will be passed to the given callbacks.
+ * @returns The same type for all the implementations.
+ * @throws If there is no valid implementation for the current Foundry version.
+ */
+export function versionSwitchBehavior<T>(switchSchema : {
+  v13?: (...args: any[]) => T,
+}, ...args: any[]): T | void {
+  switch (getGame().release.generation) {
+    case 13: if (switchSchema.v13) { return switchSchema.v13(args) } break;
+    default: throw new Error('could not find a valid implementation for this Foundry version');
+  }
 }

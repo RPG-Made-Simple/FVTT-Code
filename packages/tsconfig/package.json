@@ -6,7 +6,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@vue/tsconfig": "^0.7.0",
-    "foundry-vtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main"
+    "@vue/tsconfig": "^0.7.0"
   }
 }

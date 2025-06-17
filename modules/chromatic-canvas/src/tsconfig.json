@@ -2,9 +2,9 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "types": [
-      "ts-runtime-checks",
       "fvtt-types",
-      "@rpgmadesimple/utils"
+      "@rpgmadesimple/debugger",
+      "@rpgmadesimple/toolbox"
     ],
     "rootDir": "../"
   }

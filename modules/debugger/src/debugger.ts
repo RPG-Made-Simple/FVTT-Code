@@ -9,8 +9,8 @@ const StringSchema = { type: "string" };
 const OptionalBooleanSchema = { type: ["boolean", "null", "undefined"] };
 
 export class Debugger {
-  static SHOULD_DEBUG: boolean = true;
-  static debuggers: Array<Debugger> = [];
+  private static SHOULD_DEBUG: boolean = true;
+  private static debuggers: Debugger[] = [];
 
   /** Which module is this Debugger from */
   private module: string;
@@ -34,6 +34,22 @@ export class Debugger {
   static shouldDebugGlobal(shouldDebug: boolean): void {
     Misc.validate({ shouldDebug }, { shouldDebug: BooleanSchema.type });
     Debugger.SHOULD_DEBUG = shouldDebug;
+  }
+
+  /**
+   * Check if global debugging is enabled.
+   * @returns `true` or `false`.
+   */
+  static isDebugGlobalEnabled(): boolean {
+    return Debugger.SHOULD_DEBUG;
+  }
+
+  /**
+   * Get the array containing all the registered debuggers.
+   * @returns `Debugger[]` containing the registered debuggers.
+   */
+  static getRegisteredDebuggers(): Debugger[] {
+    return Debugger.debuggers;
   }
 
   /**
@@ -64,8 +80,8 @@ export class Debugger {
   constructor(
     module: string,
     prefix: string,
-    shouldDebug: boolean | null | undefined,
-    shouldSave: boolean | null | undefined
+    shouldDebug?: boolean,
+    shouldSave?: boolean,
   ) {
     Misc.validate(
       { module, prefix, shouldDebug, shouldSave },
@@ -100,11 +116,14 @@ export class Debugger {
    */
   log(...params: Array<any>) {
     if (Debugger.SHOULD_DEBUG && this.shouldDebugVal) {
-      console.log(`${this.prefix}>`, ...params);
+      console.log(this.prefix, ...params);
     }
 
     if (Debugger.SHOULD_DEBUG && this.shouldSaveVal) {
-      this.logStorage += Misc.argStringfy(...params);
+      this.logStorage += Misc.argStringfy(
+        `[${Time.getNowFormatted()}]`,
+        ...params
+      );
     }
   }
 
