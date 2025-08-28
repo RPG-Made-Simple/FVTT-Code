@@ -1,6 +1,5 @@
-import { FoundryFileSystem, Misc, Module, Permission, SocketManager, Sidebar } from "@rpgmadesimple/utils";
+import { FoundryFileSystem, Misc, Module, Permission, SocketManager } from "@rpgmadesimple/utils";
 import type { ModuleState } from "@rpgmadesimple/utils/src/module.ts";
-import type { SidebarToolsOptions } from "@rpgmadesimple/utils/src/sidebar";
 
 export class Toolbox {
   static SocketManager = new SocketManager();
@@ -165,19 +164,5 @@ export class Toolbox {
   */
   static firstHasPermissionToEdit(document: any): string | undefined {
     return Permission.firstHasPermissionToEdit(document);
-  }
-
-  /**
-  * Setup sidebar tools.
-  * @param controls the controls being added.
-  * @param tools the tools being added.
-  * @param options the options.
-  */
-  static setupSidebarTools(
-    controls: SceneControls.Control[],
-    tools: SceneControls.Tool[],
-    options: SidebarToolsOptions,
-  ): undefined {
-    return Sidebar.setupSidebarTools(controls, tools, options);
   }
 }

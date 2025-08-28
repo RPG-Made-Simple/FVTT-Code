@@ -5,6 +5,7 @@ import { ChromaticCanvas as ChromaticCanvasClass} from "./chromatic-canvas.ts";
 import { CanvasEffectWindow } from "./canvas-effect-window.ts";
 import { registerEffects } from "./effect.ts";
 import { registerLayers } from "./chromatic-canvas-layer.ts";
+import { setupSidebarTools } from "@rpgmadesimple/utils/src/sidebar.ts";
 
 declare global {
   type ChromaticCanvas = typeof ChromaticCanvasClass;
@@ -38,68 +39,55 @@ Hooks.once('toolbox.ready', () => {
   new CanvasEffectWindow().render(true);
 })
 
-Hooks.on('getSceneControlButtons', (controls) => {
-  if (!game.user?.isGM) return;
-
-  const shakeTool: SceneControls.Tool = {
-    name: 'shake',
-    title: 'Shake',
-    icon: 'fa-solid fa-waveform',
-    button: true,
-    visible: true,
-    // @ts-ignore
-    onChange: () => {
-      ChromaticCanvasClass.shake();
+setupSidebarTools(
+  [
+    // Shake tool
+    {
+      name: 'shake',
+      title: 'Shake',
+      icon: 'fa-solid fa-waveform',
+      button: true,
+      visible: true,
+      order: 1,
+      onEvent: () => {
+        ChromaticCanvasClass.shake();
+      },
     },
-    order: 2,
-  };
-
-  const pulsateTool: SceneControls.Tool = {
-    name: 'pulsate',
-    title: 'Pulsate',
-    icon: 'fa-solid fa-wave-pulse',
-    button: true,
-    visible: true,
-    // @ts-ignore
-    onChange: () => {
-      ChromaticCanvasClass.pulsate({
-        iterations: 3,
-      });
+    // Pulsate tool
+    {
+      name: 'pulsate',
+      title: 'Pulsate',
+      icon: 'fa-solid fa-wave-pulse',
+      button: true,
+      visible: true,
+      order: 2,
+      onEvent: () => {
+        ChromaticCanvasClass.pulsate({
+          iterations: 3,
+        });
+      },
     },
-    order: 3,
-  };
-
-  const spinTool: SceneControls.Tool = {
-    name: 'spin',
-    title: 'Spin',
-    icon: 'fa-solid fa-rotate-right',
-    button: true,
-    visible: true,
-    // @ts-ignore
-    onChange: () => {
-      ChromaticCanvasClass.spin({
-        duration: 1000,
-      });
+    // Spin tool
+    {
+      name: 'spin',
+      title: 'Spin',
+      icon: 'fa-solid fa-rotate-right',
+      button: true,
+      visible: true,
+      order: 3,
+      onEvent: () => {
+        ChromaticCanvasClass.spin({
+          duration: 1000,
+        });
+      },
     },
-    order: 4,
-  };
-
-  const control: SceneControls.Control = {
-    name: Constants.id,
+  ],
+  // Control
+  {
+    id: Constants.id,
     title: Constants.nameFlat,
     icon: 'fa-solid fa-hand-sparkles',
-    visible: true,
     layer: Constants.interfaceLayer,
-    tools: {
-      // @ts-ignore
-      shake: shakeTool,
-      pulsate: pulsateTool,
-      spin: spinTool,
-    },
-    activeTool: '',
-    order: 99,
-  };
-
-  // @ts-ignore
-  controls[Constants.id] = control;
-});
+    visible: game.user?.isGM as boolean,
+  },
+);
