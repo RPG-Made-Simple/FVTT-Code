@@ -68,6 +68,7 @@ interface FoundryModuleOptions {
   description: string;
   version: string;
   library?: boolean;
+  socket?: boolean,
   authors: Array<{
     name: string;
     email?: string;
@@ -104,6 +105,7 @@ export default function FoundryPlugin(options: FoundryPluginOptions): Plugin {
         description: options.module.description,
         version: options.module.version,
         library: options.module.library,
+        socket: options.module.socket,
         authors: options.module.authors,
         languages: languageData,
         compatibility: {

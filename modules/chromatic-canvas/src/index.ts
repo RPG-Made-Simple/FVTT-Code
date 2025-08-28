@@ -3,6 +3,7 @@ import { Constants } from "./constants.ts";
 import { requireDebugger, requireToolbox } from "./imports.ts";
 import { ChromaticCanvas as ChromaticCanvasClass} from "./chromatic-canvas.ts";
 import { CanvasEffectWindow } from "./canvas-effect-window.ts";
+import { registerEffects } from "./effect.ts";
 
 declare global {
   type ChromaticCanvas = typeof ChromaticCanvasClass;
@@ -23,6 +24,7 @@ Hooks.once('toolbox.ready', () => {
   Constants.d.info(`Version ${Constants.t.getGame().modules.get(Constants.id).version}`);
   Constants.d.info('Library by 🐲 RPG Made Simple');
 
+  registerEffects();
   prepareForAPI(Constants.id, ChromaticCanvasClass);
 
   Constants.t.showcaseModule(Constants.nameFlat);
@@ -44,12 +46,12 @@ Hooks.on('getSceneControlButtons', (controls) => {
     // @ts-ignore
     onChange() {
       console.error('test');
-      ChromaticCanvasClass.shake({
-        intensity: 1,
-        duration: 500,
-        iterations: 1,
-        target: 'board',
-      });
+      // ChromaticCanvasClass.shake({
+      //   intensity: 1,
+      //   duration: 500,
+      //   iterations: 1,
+      //   target: 'board',
+      // });
       console.error('test');
     },
     button: true,

@@ -93,6 +93,9 @@ export function prepareForAPI(moduleId: string, register: unknown): void {
   }
 }
 
+// @ts-ignore
+import Game = foundry.Game;
+
 /**
  * Wrapper to get game.
  * @returns The game instance.

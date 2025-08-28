@@ -10,6 +10,7 @@ export default defineConfig({
         description: 'Library that adds special effects to the canvas.',
         version: '2.0.0',
         library: true,
+        socket: true,
         authors: [
           {
             name: 'ZotyDev',

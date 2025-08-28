@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prepare": "turbo run prepare --continue",
     "build": "turbo run build --continue",
     "dev": "turbo run dev --continue",
     "lint": "turbo run lint --continue",

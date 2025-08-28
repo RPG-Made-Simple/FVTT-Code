@@ -1,42 +1,15 @@
-import { animate } from "animejs";
+import { dispatch, EffectType, type EffectOptions, type TargetOptions } from "./effect";
 
 export class ChromaticCanvas {
-  static shake(options: {
-    intensity: number,
-    duration: number,
-    iterations: number,
-    target: string,
-  }) {
-    const a = 1 * options.intensity;
-    const b = 2 * options.intensity;
-    const c = 3 * options.intensity;
+  static shake(options: EffectOptions, target: TargetOptions) {
+    dispatch(EffectType.SHAKE, options, target);
+  }
 
-    let iterations = 0;
-    animate(`#${options.target}`, {
-      keyframes: [
-        { translateX:  a, translateY:  a, rotate:  0 },
-        { translateX: -a, translateY: -b, rotate: -a },
-        { translateX: -c, translateY: -b, rotate:  a },
-        { translateX:  c, translateY:  b, rotate:  0 },
-        { translateX:  a, translateY: -a, rotate:  a },
-        { translateX:  a, translateY:  b, rotate: -a },
-        { translateX: -c, translateY:  a, rotate:  0 },
-        { translateX:  c, translateY:  a, rotate: -a },
-        { translateX: -a, translateY: -a, rotate:  a },
-        { translateX:  a, translateY:  b, rotate:  0 },
-        { translateX:  a, translateY: -b, rotate: -a },
-      ],
-      duration: options.duration,
-      onBegin: () => {
-        iterations++;
-      },
-      onComplete: (anim) => {
-        if (iterations < options.iterations) {
-          anim.restart();
-        } else {
-          anim.reset();
-        }
-      },
-    });
+  static pulsate(options: EffectOptions, target: TargetOptions) {
+    dispatch(EffectType.PULSATE, options, target);
+  }
+
+  static spin(options: EffectOptions, target: TargetOptions) {
+    dispatch(EffectType.SPIN, options, target);
   }
 }

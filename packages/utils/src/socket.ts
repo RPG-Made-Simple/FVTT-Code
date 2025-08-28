@@ -55,7 +55,7 @@ export class SocketManager {
     }
     if (!module.socket) {
       console.error(
-        `Failed to get socker for module '${moduleId}'. Please set '"socket": true' in your manifest and restart Foundry`,
+        `Failed to get socket for module '${moduleId}'. Please set '"socket": true' in your manifest and restart Foundry`,
       );
       return undefined;
     }
@@ -234,6 +234,8 @@ export class Socket {
           if (!game.user?.isGM) return;
           break;
         case RecipientType.EVERYONE:
+          break;
+        default:
           console.error(
             `Unknown recipient '${recipient}' when trying to execute '${handlerName}' for '${this.name}'`,
           );

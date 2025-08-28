@@ -1,12 +1,16 @@
-import { getGame } from "@rpgmadesimple/utils/src/misc";
 import { Constants } from "./constants";
 import { Misc } from "@rpgmadesimple/utils";
+import { shake } from "./effects/shake";
+import { pulsate } from "./effects/pulsate";
+import { spin } from "./effects/spin";
 
-enum EffectType {
-  SHAKE = 'shake'
+export enum EffectType {
+  SHAKE = 'shake',
+  PULSATE = 'pulsate',
+  SPIN = 'spin',
 }
 
-interface EffectOptions {
+export interface EffectOptions {
   intensity: number,
   duration: number,
   iterations: number,
@@ -14,10 +18,10 @@ interface EffectOptions {
 }
 
 const EffectOptionsSchema = {
-  intensity: 'number',
-  duration: 'number',
-  iterations: 'number',
-  target: ['string', 'array'],
+  intensity: ['number', 'undefined'],
+  duration: ['number', 'undefined'],
+  iterations: ['number', 'undefined'],
+  target: ['string', 'array', 'undefined'],
 }
 
 const defaultEffectOptions: EffectOptions = {
@@ -27,14 +31,19 @@ const defaultEffectOptions: EffectOptions = {
   target: 'board'
 }
 
-interface TargetOptions {
+export interface TargetOptions {
   everyone?: boolean,
   userId?: string | string[]
 }
 
 const targetOptionsSchema = {
   everyone: ['boolean', 'undefined'],
-  userId: ['string', 'array'],
+  userId: ['string', 'array', 'undefined'],
+}
+
+const defaultTargetOptions: TargetOptions = {
+  everyone: true,
+  userId: undefined,
 }
 
 export function dispatch(effect: EffectType, options: EffectOptions, target: TargetOptions) {
@@ -42,18 +51,29 @@ export function dispatch(effect: EffectType, options: EffectOptions, target: Tar
   Misc.validate({ ...options }, EffectOptionsSchema);
   Misc.validate({ ...target }, targetOptionsSchema);
 
-  if (!Array.isArray(target.userId)) { target.userId = [target.userId!] }
-
   const opts: EffectOptions = {
     ...defaultEffectOptions,
     ...options
   }
 
-  if (target.everyone) {
-    Constants.s?.executeForEveryone(effect, options);
-  } else {
-    for (const userId of target.userId) {
-      Constants.s?.executeAsUser(effect, userId, options);
+  const targ: TargetOptions = {
+    ...defaultTargetOptions,
+    ...target,
+  }
+
+  if (!Array.isArray(targ.userId)) { targ.userId = [targ.userId!] }
+
+  if (targ.everyone) {
+    Constants.s?.executeForEveryone(effect, opts);
+  } else if (targ.userId != undefined) {
+    for (const userId of targ.userId) {
+      Constants.s?.executeAsUser(effect, userId, opts);
     }
   }
+}
+
+export function registerEffects() {
+  Constants.s?.register(EffectType.SHAKE, shake);
+  Constants.s?.register(EffectType.PULSATE, pulsate);
+  Constants.s?.register(EffectType.SPIN, spin);
 }
