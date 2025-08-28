@@ -50,6 +50,25 @@ export function setupSidebarTools(
         }));
 
         const usableTools: Record<string, SceneControls.Tool> = {};
+        if (!options.activeTool) {
+          const activationTool: SceneControls.Tool = {
+            name: 'activation',
+            title: 'Activation',
+            icon: 'fa-solid fa-power-off',
+            toggle: true,
+            // @ts-ignore
+            order: 0,
+            active: true,
+            visible: true,
+            // @ts-ignore
+            onChange: (_event, active) => {
+              if (!active) return;
+              // @ts-ignore
+              canvas.layers.find((l) => l.options.name === options.layer)?.activate();
+            },
+          };
+          usableTools['activation'] = activationTool;
+        }
         mappedTools.forEach(t => usableTools[t.name] = t);
 
         const control: SceneControls.Control = {
@@ -58,7 +77,7 @@ export function setupSidebarTools(
           icon: options.icon,
           layer: options.layer,
           visible: options.visible,
-          activeTool: options.activeTool as string,
+          activeTool: options.activeTool?? 'activation',
           // @ts-ignore
           tools: usableTools,
         };
