@@ -69,6 +69,39 @@ interface FoundryModuleOptions {
   version: string;
   library?: boolean;
   socket?: boolean,
+  compatibility: {
+    minimum: string,
+    maximum?: string,
+    verified: string,
+  },
+  relationships?: {
+    systems?: Array<{
+      id: string,
+      compatibility?: {
+        minimum: string,
+        maximum?: string,
+        verified: string,
+      },
+    }>,
+    requires?: Array<{
+      id: string,
+      manifest?: string,
+      compatibility?: {
+        minimum: string,
+        maximum?: string,
+        verified: string,
+      },
+    }>,
+    recommends?: Array<{
+    id: string,
+      manifest?: string,
+      compatibility?: {
+        minimum: string,
+        maximum?: string,
+        verified: string,
+      },
+    }>,
+  },
   authors: Array<{
     name: string;
     email?: string;
@@ -108,6 +141,7 @@ export default function FoundryPlugin(options: FoundryPluginOptions): Plugin {
         socket: options.module.socket,
         authors: options.module.authors,
         languages: languageData,
+        relationships: options.module.relationships,
         compatibility: {
           minimum: '10',
           verified: '12',
@@ -119,7 +153,6 @@ export default function FoundryPlugin(options: FoundryPluginOptions): Plugin {
         download: `${options.module.repo}/releases/latest/download/${options.module.id}.zip`,
         readme: `${options.module.repo}/blob/main/modules/${options.module.id}/README.md`,
         changelog: `${options.module.repo}/blob/main/modules/${options.module.id}/CHANGELOG.md`,
-        relationships: {},
         esmodules: ['./module.js'],
       };
 

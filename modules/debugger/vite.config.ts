@@ -10,6 +10,10 @@ export default defineConfig({
         description: 'Library that adds debugger helpers',
         version: '2.0.0',
         library: true,
+        compatibility: {
+          minimum: '13',
+          verified: '13.347'
+        },
         authors: [
           {
             name: 'ZotyDev',

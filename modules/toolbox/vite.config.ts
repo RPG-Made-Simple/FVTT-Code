@@ -10,6 +10,21 @@ export default defineConfig({
         description: 'Library that adds common utilities.',
         version: '2.0.0',
         library: true,
+        compatibility: {
+          minimum: '13',
+          verified: '13.347'
+        },
+        relationships: {
+          requires: [
+            {
+              id: 'debugger',
+              compatibility: {
+                minimum: '2',
+                verified: '2.0.0'
+              }
+            }
+          ]
+        },
         authors: [
           {
             name: 'ZotyDev',

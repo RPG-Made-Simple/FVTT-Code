@@ -11,6 +11,28 @@ export default defineConfig({
         version: '2.0.0',
         library: true,
         socket: true,
+        compatibility: {
+          minimum: '13',
+          verified: '13.347'
+        },
+        relationships: {
+          requires: [
+            {
+              id: 'debugger',
+              compatibility: {
+                minimum: '2',
+                verified: '2.0.0'
+              }
+            },
+            {
+              id: 'toolbox',
+              compatibility: {
+                minimum: '2',
+                verified: '2.0.0'
+              }
+            }
+          ]
+        },
         authors: [
           {
             name: 'ZotyDev',
