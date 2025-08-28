@@ -11,10 +11,10 @@ export enum EffectType {
 }
 
 export interface EffectOptions {
-  intensity: number,
-  duration: number,
-  iterations: number,
-  target: string | string[],
+  intensity?: number,
+  duration?: number,
+  iterations?: number,
+  target?: string | string[],
 }
 
 const EffectOptionsSchema = {
@@ -46,7 +46,7 @@ const defaultTargetOptions: TargetOptions = {
   userId: undefined,
 }
 
-export function dispatch(effect: EffectType, options: EffectOptions, target: TargetOptions) {
+export function dispatch(effect: EffectType, options?: EffectOptions, target?: TargetOptions) {
   Misc.validate({ effect }, { effect: 'string' });
   Misc.validate({ ...options }, EffectOptionsSchema);
   Misc.validate({ ...target }, targetOptionsSchema);

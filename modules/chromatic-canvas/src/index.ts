@@ -4,6 +4,7 @@ import { requireDebugger, requireToolbox } from "./imports.ts";
 import { ChromaticCanvas as ChromaticCanvasClass} from "./chromatic-canvas.ts";
 import { CanvasEffectWindow } from "./canvas-effect-window.ts";
 import { registerEffects } from "./effect.ts";
+import { registerLayers } from "./chromatic-canvas-layer.ts";
 
 declare global {
   type ChromaticCanvas = typeof ChromaticCanvasClass;
@@ -24,6 +25,7 @@ Hooks.once('toolbox.ready', () => {
   Constants.d.info(`Version ${Constants.t.getGame().modules.get(Constants.id).version}`);
   Constants.d.info('Library by 🐲 RPG Made Simple');
 
+  registerLayers();
   registerEffects();
   prepareForAPI(Constants.id, ChromaticCanvasClass);
 
@@ -37,24 +39,49 @@ Hooks.once('toolbox.ready', () => {
 })
 
 Hooks.on('getSceneControlButtons', (controls) => {
-  console.warn(controls);
+  if (!game.user?.isGM) return;
 
   const shakeTool: SceneControls.Tool = {
     name: 'shake',
     title: 'Shake',
     icon: 'fa-solid fa-waveform',
-    // @ts-ignore
-    onChange() {
-      console.error('test');
-      // ChromaticCanvasClass.shake({
-      //   intensity: 1,
-      //   duration: 500,
-      //   iterations: 1,
-      //   target: 'board',
-      // });
-      console.error('test');
-    },
     button: true,
+    visible: true,
+    // @ts-ignore
+    onChange: () => {
+      ChromaticCanvasClass.shake();
+    },
+    order: 2,
+  };
+
+  const pulsateTool: SceneControls.Tool = {
+    name: 'pulsate',
+    title: 'Pulsate',
+    icon: 'fa-solid fa-wave-pulse',
+    button: true,
+    visible: true,
+    // @ts-ignore
+    onChange: () => {
+      ChromaticCanvasClass.pulsate({
+        iterations: 3,
+      });
+    },
+    order: 3,
+  };
+
+  const spinTool: SceneControls.Tool = {
+    name: 'spin',
+    title: 'Spin',
+    icon: 'fa-solid fa-rotate-right',
+    button: true,
+    visible: true,
+    // @ts-ignore
+    onChange: () => {
+      ChromaticCanvasClass.spin({
+        duration: 1000,
+      });
+    },
+    order: 4,
   };
 
   const control: SceneControls.Control = {
@@ -62,12 +89,15 @@ Hooks.on('getSceneControlButtons', (controls) => {
     title: Constants.nameFlat,
     icon: 'fa-solid fa-hand-sparkles',
     visible: true,
+    layer: Constants.interfaceLayer,
     tools: {
       // @ts-ignore
-      shakeTool,
+      shake: shakeTool,
+      pulsate: pulsateTool,
+      spin: spinTool,
     },
-    layer: 'tiles',
-
+    activeTool: '',
+    order: 99,
   };
 
   // @ts-ignore
