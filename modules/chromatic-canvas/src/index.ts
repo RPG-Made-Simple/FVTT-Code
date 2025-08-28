@@ -47,7 +47,7 @@ setupSidebarTools(
       title: 'Shake',
       icon: 'fa-solid fa-waveform',
       button: true,
-      visible: true,
+      visible: () => true,
       order: 1,
       onEvent: () => {
         ChromaticCanvasClass.shake();
@@ -59,7 +59,7 @@ setupSidebarTools(
       title: 'Pulsate',
       icon: 'fa-solid fa-wave-pulse',
       button: true,
-      visible: true,
+      visible: () => true,
       order: 2,
       onEvent: () => {
         ChromaticCanvasClass.pulsate({
@@ -73,7 +73,7 @@ setupSidebarTools(
       title: 'Spin',
       icon: 'fa-solid fa-rotate-right',
       button: true,
-      visible: true,
+      visible: () => true,
       order: 3,
       onEvent: () => {
         ChromaticCanvasClass.spin({
@@ -88,6 +88,6 @@ setupSidebarTools(
     title: Constants.nameFlat,
     icon: 'fa-solid fa-hand-sparkles',
     layer: Constants.interfaceLayer,
-    visible: game.user?.isGM as boolean,
+    visible: () => game.user?.isGM as boolean,
   },
 );

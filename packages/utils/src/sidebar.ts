@@ -8,7 +8,7 @@ export interface SidebarTool {
   button?: boolean;
   order?: number;
   active?: boolean;
-  visible: boolean;
+  visible: () => boolean;
   onEvent?: (event?: any, active?: boolean) => void;
 }
 
@@ -17,7 +17,7 @@ export interface SidebarToolsOptions {
   title: string,
   icon: string,
   layer: string,
-  visible: boolean,
+  visible: () => boolean,
   activeTool?: string,
 }
 
@@ -43,7 +43,7 @@ export function setupSidebarTools(
           button: t.button,
           order: t.order,
           active: t.active,
-          visible: t.visible,
+          visible: t.visible(),
           onChange: (event: any, active: boolean) => {
             t.onEvent?.(event, active);
           },
@@ -76,7 +76,7 @@ export function setupSidebarTools(
           title: options.title,
           icon: options.icon,
           layer: options.layer,
-          visible: options.visible,
+          visible: options.visible(),
           activeTool: options.activeTool?? 'activation',
           // @ts-ignore
           tools: usableTools,
