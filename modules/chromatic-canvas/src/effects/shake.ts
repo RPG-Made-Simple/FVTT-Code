@@ -1,7 +1,7 @@
-import type { EffectOptions } from "../effect";
+import type { InternalEffectOptions } from "../effect";
 import { animate } from "animejs";
 
-export function shake(options: EffectOptions) {
+export function shake(options: InternalEffectOptions) {
   const a = 1 * options.intensity;
   const b = 2 * options.intensity;
   const c = 3 * options.intensity;

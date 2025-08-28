@@ -12,4 +12,8 @@ export class ChromaticCanvas {
   static spin(options?: EffectOptions, target?: TargetOptions) {
     dispatch(EffectType.SPIN, options, target);
   }
+
+  static hyperColor(options?: EffectOptions, target?: TargetOptions) {
+    dispatch(EffectType.HYPER_COLOR, options, target);
+  }
 }

@@ -3,11 +3,13 @@ import { Misc } from "@rpgmadesimple/utils";
 import { shake } from "./effects/shake";
 import { pulsate } from "./effects/pulsate";
 import { spin } from "./effects/spin";
+import { hyperColor } from "./effects/hyperColor";
 
 export enum EffectType {
   SHAKE = 'shake',
   PULSATE = 'pulsate',
   SPIN = 'spin',
+  HYPER_COLOR = 'hyper_color',
 }
 
 export interface EffectOptions {
@@ -17,6 +19,13 @@ export interface EffectOptions {
   target?: string | string[],
 }
 
+export interface InternalEffectOptions {
+  intensity: number,
+  duration: number,
+  iterations: number,
+  target: string[],
+}
+
 const EffectOptionsSchema = {
   intensity: ['number', 'undefined'],
   duration: ['number', 'undefined'],
@@ -24,11 +33,11 @@ const EffectOptionsSchema = {
   target: ['string', 'array', 'undefined'],
 }
 
-const defaultEffectOptions: EffectOptions = {
+const defaultEffectOptions: InternalEffectOptions = {
   intensity: 1,
   duration: 500,
   iterations: 1,
-  target: 'board'
+  target: ['board']
 }
 
 export interface TargetOptions {
@@ -46,15 +55,26 @@ const defaultTargetOptions: TargetOptions = {
   userId: undefined,
 }
 
+function normalizeOptions(options?: EffectOptions): InternalEffectOptions {
+  const opts: InternalEffectOptions = {
+    intensity: options?.intensity ?? defaultEffectOptions.intensity,
+    duration: options?.duration ?? defaultEffectOptions.duration,
+    iterations: options?.iterations ?? defaultEffectOptions.iterations,
+    target: Array.isArray(options?.target)
+      ? options!.target
+      : options?.target
+      ? [options.target]
+      : defaultEffectOptions.target
+  };
+  return opts;
+}
+
 export function dispatch(effect: EffectType, options?: EffectOptions, target?: TargetOptions) {
   Misc.validate({ effect }, { effect: 'string' });
   Misc.validate({ ...options }, EffectOptionsSchema);
   Misc.validate({ ...target }, targetOptionsSchema);
 
-  const opts: EffectOptions = {
-    ...defaultEffectOptions,
-    ...options
-  }
+  const opts = normalizeOptions(options);
 
   const targ: TargetOptions = {
     ...defaultTargetOptions,
@@ -76,4 +96,5 @@ export function registerEffects() {
   Constants.s?.register(EffectType.SHAKE, shake);
   Constants.s?.register(EffectType.PULSATE, pulsate);
   Constants.s?.register(EffectType.SPIN, spin);
+  Constants.s?.register(EffectType.HYPER_COLOR, hyperColor);
 }

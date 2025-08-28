@@ -36,7 +36,7 @@ Hooks.once('toolbox.ready', () => {
 
   Constants.d.info('Ready!');
 
-  new CanvasEffectWindow().render(true);
+  // new CanvasEffectWindow().render(true);
 })
 
 setupSidebarTools(
@@ -81,6 +81,21 @@ setupSidebarTools(
         });
       },
     },
+    // Hyper color tool
+    {
+      name: 'hyper-color',
+      title: 'Hyper Color',
+      icon: 'fa-solid fa-arrows-to-eye',
+      button: true,
+      visible: () => true,
+      order: 4,
+      onEvent: () => {
+        ChromaticCanvasClass.hyperColor({
+          iterations: 10,
+          duration: 500,
+        });
+      },
+    }
   ],
   // Control
   {

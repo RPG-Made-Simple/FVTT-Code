@@ -1,7 +1,7 @@
 import { animate } from "animejs";
-import type { EffectOptions } from "../effect";
+import type { InternalEffectOptions } from "../effect";
 
-export function spin(options: EffectOptions) {
+export function spin(options: InternalEffectOptions) {
   let iterations = 0;
   animate(`#${options.target}`, {
     keyframes: [
