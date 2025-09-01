@@ -29,8 +29,8 @@ export async function copyFolder(src: string, dest: string) {
   }
 }
 
-function generateDeclarations() {
-  const entry = path.resolve(process.cwd(), 'src/index.ts');
+export function generateDeclarations() {
+  const entry = path.resolve(process.cwd(), "src/index.ts");
   console.log("generating declarations for:", entry);
 
   const options: ts.CompilerOptions = {
@@ -60,3 +60,5 @@ function generateDeclarations() {
     console.log("successfuly generated declarations");
   }
 }
+
+

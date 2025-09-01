@@ -2,7 +2,7 @@ import { ModuleOptions } from "./options/moduleOptions";
 
 import { promises as fs } from 'fs';
 import path from 'path';
-import { copyFolder, deleteFolderRecursive } from "./utils";
+import { copyFolder, deleteFolderRecursive, generateDeclarations } from "./utils";
 
 export async function generateModuleBundle(options: ModuleOptions) {
   console.log("generating module.json...");
@@ -66,6 +66,8 @@ export async function generateModuleBundle(options: ModuleOptions) {
   }
 
   console.log("lang files copied");
+
+  generateDeclarations();
 }
 
 export async function writeModuleBundle(moduleId: string) {
