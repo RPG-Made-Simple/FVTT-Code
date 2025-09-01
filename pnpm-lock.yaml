@@ -184,6 +184,9 @@ importers:
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.10.2)(typescript@5.7.2)
+      tsc-esm-fix:
+        specifier: ^3.1.2
+        version: 3.1.2
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -210,7 +213,7 @@ importers:
         version: link:../tsconfig
       '@vintl/unplugin':
         specifier: ^2.0.0
-        version: 2.0.0(@vue/compiler-core@3.5.13)(rollup@4.28.1)(vue@3.5.13(typescript@5.7.2))
+        version: 2.0.0(@vue/compiler-core@3.5.13)(rollup@4.28.1)(vite@6.0.11(@types/node@22.10.2)(sass@1.83.0)(terser@5.37.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))
       '@vintl/vintl':
         specifier: ^4.4.1
         version: 4.4.1(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
@@ -1180,6 +1183,10 @@ packages:
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
+  '@topoconfig/extends@0.16.2':
+    resolution: {integrity: sha512-sTF+qpWakr5jf1Hn/kkFSi833xPW15s/loMAiKSYSSVv4vDonxf6hwCGzMXjLq+7HZoaK6BgaV72wXr1eY7FcQ==}
+    hasBin: true
+
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
 
@@ -1649,6 +1656,9 @@ packages:
   define-data-property@1.1.4:
     resolution: {integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==}
     engines: {node: '>= 0.4'}
+
+  depseek@0.4.3:
+    resolution: {integrity: sha512-0Ex/Uoz9Y9oipbqvgSc7FoV2q4GTDGORkg8TGgM9Pd3RyvRzrDYScKplWiqHU7WqckbKN5kukqD0opEayu2bXg==}
 
   detect-libc@1.0.3:
     resolution: {integrity: sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg==}
@@ -2180,6 +2190,11 @@ packages:
   json-stable-stringify@1.2.0:
     resolution: {integrity: sha512-ex8jk9BZHBolvbd5cRnAgwyaYcYB0qZldy1e+LCOdcF6+AUmVZ6LcGUMzsRTW83QMeu+GxZGrcLqxqrgfXGvIw==}
     engines: {node: '>= 0.4'}
+
+  json5@2.2.3:
+    resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
+    engines: {node: '>=6'}
+    hasBin: true
 
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
@@ -2801,6 +2816,11 @@ packages:
   ts-runtime-checks@0.6.3:
     resolution: {integrity: sha512-9rL0VjkII8/hD60wQSCVPaBHOX+S0DVesXK1+eAD5rPX9PSsVebZjWEyBysrNtR3XGuAgA0fyn8OhNjrNMmN5g==}
 
+  tsc-esm-fix@3.1.2:
+    resolution: {integrity: sha512-1/OpZssMcEp2ae6DyZV+yvDviofuCdDf7dEWEaBvm/ac8vtS04lFyl0LVs8LQE56vjKHytgzVjPIL9udM4QuNg==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -2853,6 +2873,9 @@ packages:
   type-fest@0.8.1:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
+
+  type-flag@3.0.0:
+    resolution: {integrity: sha512-3YaYwMseXCAhBB14RXW5cRQfJQlEknS6i4C8fCfeUdS3ihG9EdccdR9kt3vP73ZdeTGmPb4bZtkDn5XMIn1DLA==}
 
   typescript-eslint@8.18.1:
     resolution: {integrity: sha512-Mlaw6yxuaDEPQvb/2Qwu3/TfgeBHy9iTJ3mTwe7OvpPmF6KPQjVOfGyEJpPv6Ez2C34OODChhXrzYw/9phI0MQ==}
@@ -4057,6 +4080,8 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
+  '@topoconfig/extends@0.16.2': {}
+
   '@tsconfig/node10@1.0.11': {}
 
   '@tsconfig/node12@1.0.11': {}
@@ -4189,7 +4214,7 @@ snapshots:
       '@typescript-eslint/types': 8.18.1
       eslint-visitor-keys: 4.2.0
 
-  '@vintl/unplugin@2.0.0(@vue/compiler-core@3.5.13)(rollup@4.28.1)(vue@3.5.13(typescript@5.7.2))':
+  '@vintl/unplugin@2.0.0(@vue/compiler-core@3.5.13)(rollup@4.28.1)(vite@6.0.11(@types/node@22.10.2)(sass@1.83.0)(terser@5.37.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))':
     dependencies:
       '@formatjs/cli-lib': 6.6.6(@vue/compiler-core@3.5.13)(vue@3.5.13(typescript@5.7.2))
       '@formatjs/icu-messageformat-parser': 2.9.7
@@ -4200,6 +4225,7 @@ snapshots:
       unplugin: 1.16.0
     optionalDependencies:
       rollup: 4.28.1
+      vite: 6.0.11(@types/node@22.10.2)(sass@1.83.0)(terser@5.37.0)(yaml@2.6.1)
     transitivePeerDependencies:
       - '@glimmer/env'
       - '@glimmer/reference'
@@ -4572,6 +4598,8 @@ snapshots:
       es-define-property: 1.0.1
       es-errors: 1.3.0
       gopd: 1.2.0
+
+  depseek@0.4.3: {}
 
   detect-libc@1.0.3:
     optional: true
@@ -5181,6 +5209,8 @@ snapshots:
       isarray: 2.0.5
       jsonify: 0.0.1
       object-keys: 1.1.1
+
+  json5@2.2.3: {}
 
   jsonfile@6.1.0:
     dependencies:
@@ -5894,6 +5924,15 @@ snapshots:
 
   ts-runtime-checks@0.6.3: {}
 
+  tsc-esm-fix@3.1.2:
+    dependencies:
+      '@topoconfig/extends': 0.16.2
+      depseek: 0.4.3
+      fast-glob: 3.3.2
+      fs-extra: 11.2.0
+      json5: 2.2.3
+      type-flag: 3.0.0
+
   tslib@2.8.1: {}
 
   turbo-darwin-64@2.3.3:
@@ -5932,6 +5971,8 @@ snapshots:
   type-fest@0.6.0: {}
 
   type-fest@0.8.1: {}
+
+  type-flag@3.0.0: {}
 
   typescript-eslint@8.18.1(eslint@9.17.0)(typescript@5.7.2):
     dependencies:

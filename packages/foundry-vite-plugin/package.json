@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "prepare": "tsc",
+    "prepare": "tsc && tsc-esm-fix --outDir dist",
     "watch": "tsc --watch",
     "lint": "eslint . && prettier --check .",
     "fix": "eslint . --fix && prettier --write ."
@@ -17,6 +17,7 @@
   "devDependencies": {
     "@rpgmadesimple/tsconfig": "workspace:*",
     "ts-node": "^10.9.2",
+    "tsc-esm-fix": "^3.1.2",
     "typescript": "^5.7.2"
   }
 }
