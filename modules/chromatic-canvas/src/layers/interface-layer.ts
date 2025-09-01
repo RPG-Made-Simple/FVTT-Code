@@ -1,7 +1,7 @@
 import type { HandleEmptyObject } from "fvtt-types/utils";
-import { Constants } from "./constants";
+import { Constants } from "../constants";
 
-class ChromaticCanvasInterfaceLayer extends InteractionLayer {
+export class ChromaticCanvasInterfaceLayer extends InteractionLayer {
   constructor() {
     super();
   }
@@ -18,11 +18,4 @@ class ChromaticCanvasInterfaceLayer extends InteractionLayer {
   }
 }
 
-export function registerLayers() {
-  CONFIG.Canvas.layers = foundry.utils.mergeObject(CONFIG.Canvas.layers, {
-    chromaticCnavasInterfaceLayer: {
-      layerClass: ChromaticCanvasInterfaceLayer,
-      group: 'interface',
-    }
-  });
-}
+

@@ -1,4 +1,4 @@
-import { getGame } from "@rpgmadesimple/utils/src/misc.ts";
+import { getGame } from "@rpgmadesimple/utils/src/futureProof.ts";
 
 interface DebuggerModule extends Module {
   api?: typeof Debugger,

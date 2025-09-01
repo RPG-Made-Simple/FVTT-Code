@@ -2,10 +2,10 @@ import { prepareForAPI } from "@rpgmadesimple/utils/src/misc.ts";
 import { Constants } from "./constants.ts";
 import { requireDebugger, requireToolbox } from "./imports.ts";
 import { ChromaticCanvas as ChromaticCanvasClass} from "./chromatic-canvas.ts";
-import { CanvasEffectWindow } from "./canvas-effect-window.ts";
 import { registerEffects } from "./effect.ts";
-import { registerLayers } from "./chromatic-canvas-layer.ts";
 import { setupSidebarTools } from "@rpgmadesimple/utils/src/sidebar.ts";
+import { registerLayers } from "./layer.ts";
+import { FilterDatabase } from "./filters/index.ts";
 
 declare global {
   type ChromaticCanvas = typeof ChromaticCanvasClass;
@@ -28,6 +28,16 @@ Hooks.once('toolbox.ready', () => {
 
   registerLayers();
   registerEffects();
+  game.canvas?.app?.ticker.add(() => {
+    for (const filter of Object.values(FilterDatabase)) {
+      if (filter.active) {
+        filter.step();
+      }
+    }
+  })
+  if (game.canvas && game.canvas.environment) {
+    game.canvas.environment.filters = Object.values(FilterDatabase);
+  }
   prepareForAPI(Constants.id, ChromaticCanvasClass);
 
   Constants.t.showcaseModule(Constants.nameFlat);

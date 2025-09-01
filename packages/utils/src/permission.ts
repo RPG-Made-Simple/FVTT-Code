@@ -1,4 +1,4 @@
-import { getGame } from "./misc.ts";
+import { getGame } from "./futureProof.ts";
 
 function isValidPermission(permission: string): permission is keyof typeof CONST.USER_PERMISSIONS {
   return Object.keys(CONST.USER_PERMISSIONS).includes(permission);

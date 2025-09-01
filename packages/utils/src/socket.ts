@@ -1,6 +1,6 @@
 import { Misc } from ".";
 import { UtilsSocketInternalError, UtilsSocketInvalidUserError, UtilsSocketNoGMConnectedError, UtilsSocketRemoteException, UtilsSocketUnregisteredHandlerError } from "./errors";
-import { getGame } from "./misc";
+import { getGame } from "./futureProof";
 
 enum RecipientType {
   ONE_GM,

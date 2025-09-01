@@ -1,4 +1,4 @@
-import { FoundryFileSystem, Misc, Module, Permission, SocketManager } from "@rpgmadesimple/utils";
+import { FoundryFileSystem, FutureProof, Misc, Module, Permission, SocketManager } from "@rpgmadesimple/utils";
 import type { ModuleState } from "@rpgmadesimple/utils/src/module.ts";
 
 export class Toolbox {
@@ -89,7 +89,7 @@ export class Toolbox {
   * @throws An error if the game is not yet initialized.
   */
   static getGame(): Game {
-    return Misc.getGame();
+    return FutureProof.getGame();
   }
 
   /**

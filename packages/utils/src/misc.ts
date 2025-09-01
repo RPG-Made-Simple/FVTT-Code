@@ -1,3 +1,5 @@
+import { getGame } from "./futureProof";
+
 /**
  * Validates the type of a value.
  * @param value The value to validate.
@@ -93,21 +95,6 @@ export function prepareForAPI(moduleId: string, register: unknown): void {
   }
 }
 
-// @ts-ignore
-import Game = foundry.Game;
-
-/**
- * Wrapper to get game.
- * @returns The game instance.
- * @throws If the game is not yet initialized.
- */
-export function getGame(): Game {
-  if(!(game instanceof Game)) {
-    throw new Error('game is not initialized yet!');
-  }
-  return game;
-}
-
 /**
  * A helper that receives optional implementations for different FoundryVTT
  * versions and handle the switch between implementations.
@@ -120,7 +107,7 @@ export function versionSwitchBehavior<T>(switchSchema : {
   v13?: (...args: any[]) => T,
 }, ...args: any[]): T | void {
   switch (getGame().release.generation) {
-    case 13: if (switchSchema.v13) { return switchSchema.v13(args) } break;
+    case 13: if (switchSchema.v13) { return switchSchema.v13(...args) } break;
     default: throw new Error('could not find a valid implementation for this Foundry version');
   }
 }

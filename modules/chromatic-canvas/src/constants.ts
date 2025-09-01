@@ -7,5 +7,6 @@ export const Constants = {
   d: null as Debugger | null,
   t: null as Toolbox | null,
   s: null as Socket | null,
-  interfaceLayer: 'chromatciCanvasInterfaceLayer',
+  interfaceLayer: 'chromaticCanvasInterfaceLayer',
+  primaryLayer: 'chromaticCanvasPrimaryLayer',
 }
