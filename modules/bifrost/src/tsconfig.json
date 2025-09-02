@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "fvtt-types",
+      "@rpgmadesimple/debugger",
+      "@rpgmadesimple/toolbox"
+    ],
+    "rootDir": "../"
+  }
+}
