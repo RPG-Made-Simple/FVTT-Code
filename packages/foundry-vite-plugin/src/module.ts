@@ -2,7 +2,7 @@ import { ModuleOptions } from "./options/moduleOptions";
 
 import { promises as fs } from 'fs';
 import path from 'path';
-import { copyFolder, deleteFolderRecursive, generateDeclarations } from "./utils";
+import { copyFolder, copyLangFiles, deleteFolderRecursive, generateDeclarations } from "./utils";
 
 export async function generateModuleBundle(options: ModuleOptions) {
   console.log("generating module.json...");
@@ -22,8 +22,8 @@ export async function generateModuleBundle(options: ModuleOptions) {
     socket: options.socket,
     authors: options.authors,
     languages: languageData,
-    relationships: options.relationships,
     compatibility: options.compatibility,
+    relationships: options.relationships,
     license: "./LICENSE.md",
     url: options.repo,
     bugs: `${options.repo}/issues`,
@@ -45,27 +45,8 @@ export async function generateModuleBundle(options: ModuleOptions) {
   );
 
   console.log("module.json generated");
-  console.log("copying lang files...");
 
-  const langSrc = path.resolve(process.cwd(), options.languagePath);
-  const langDest = path.resolve(process.cwd(), "./dist/lang");
-  await fs.mkdir(langDest, { recursive: true });
-  const files = await fs.readdir(langSrc);
-
-  for (const file of files) {
-    const srcPath = path.join(langSrc, file);
-    const destPath = path.join(langDest, file);
-
-    if (file.endsWith(".json")) {
-      const content = await fs.readFile(srcPath, "utf-8");
-      const minifiedContent = JSON.stringify(JSON.parse(content));
-      await fs.writeFile(destPath, minifiedContent, "utf-8");
-    } else {
-      await fs.copyFile(srcPath, destPath);
-    }
-  }
-
-  console.log("lang files copied");
+  await copyLangFiles(options.languagePath);
 
   generateDeclarations();
 }

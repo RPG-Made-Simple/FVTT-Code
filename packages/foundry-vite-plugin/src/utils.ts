@@ -61,4 +61,28 @@ export function generateDeclarations() {
   }
 }
 
+export async function copyLangFiles(langPath: string) {
+  console.log("copying lang files...");
+
+  const langSrc = path.resolve(process.cwd(), langPath);
+  const langDest = path.resolve(process.cwd(), "./dist/lang");
+  await fs.mkdir(langDest, { recursive: true });
+  const files = await fs.readdir(langSrc);
+
+  for (const file of files) {
+    const srcPath = path.join(langSrc, file);
+    const destPath = path.join(langDest, file);
+
+    if (file.endsWith(".json")) {
+      const content = await fs.readFile(srcPath, "utf-8");
+      const minifiedContent = JSON.stringify(JSON.parse(content));
+      await fs.writeFile(destPath, minifiedContent, "utf-8");
+    } else {
+      await fs.copyFile(srcPath, destPath);
+    }
+  }
+
+  console.log("lang files copied");
+}
+
 

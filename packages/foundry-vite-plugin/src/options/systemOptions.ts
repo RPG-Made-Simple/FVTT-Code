@@ -1,4 +1,4 @@
-import { ArtifactType, Author, Compatibility, Language } from "./common";
+import { ArtifactType, Author, Compatibility, Language, ModuleRelationship } from "./common";
 
 export interface SystemOptions {
   id: string;
@@ -8,7 +8,12 @@ export interface SystemOptions {
   socket?: boolean;
   initiative: string;
   compatibility: Compatibility;
-  auhors: Author[];
+  relationships: {
+    requires?: ModuleRelationship[],
+    recommends?: ModuleRelationship[],
+  }
+  authors: Author[];
+  languagePath: string;
   languages: Language[];
   grid: {
     distance: number,
