@@ -1,4 +1,5 @@
 packages:
-  - "systems/*"
-  - "modules/*"
   - "packages/*"
+  - "modules/*"
+  - "systems/*"
+  - "bridges/*"

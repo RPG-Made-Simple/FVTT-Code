@@ -12,6 +12,7 @@ declare global {
   const ChromaticCanvas: typeof ChromaticCanvasClass;
 }
 
+// @ts-ignore
 Hooks.once('toolbox.ready', () => {
   const debuggerAPI = requireDebugger();
   Constants.d = new debuggerAPI(Constants.id, Constants.nameFlat, true, false);
@@ -42,7 +43,8 @@ Hooks.once('toolbox.ready', () => {
 
   Constants.t.showcaseModule(Constants.nameFlat);
 
-  Hooks.call('chromatic-canvas.ready');
+  // @ts-ignore
+  Hooks.call(`${Constants.id}.ready`);
 
   Constants.d.info('Ready!');
 

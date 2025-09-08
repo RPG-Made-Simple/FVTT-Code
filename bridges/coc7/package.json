@@ -1,0 +1,26 @@
+{
+  "name": "@rpgmadesimple/bifrost-coc7-bridge",
+  "version": "0.0.0",
+  "type": "module",
+  "types": "dist/types/index.d.ts",
+  "main": "dist/module.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint . && prettier --check",
+    "fix": "eslint . --fix && prettier --write ."
+  },
+  "devDependencies": {
+    "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
+    "@rpgmadesimple/foundry-vite-plugin": "workspace:*",
+    "@rpgmadesimple/tsconfig": "workspace:*",
+    "@rpgmadesimple/utils": "workspace:*",
+    "@rpgmadesimple/debugger": "workspace:*",
+    "@rpgmadesimple/toolbox": "workspace:*",
+    "@rpgmadesimple/bifrost": "workspace:*",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.4"
+  }
+}

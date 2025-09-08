@@ -1,0 +1,4 @@
+/**
+ * @typedef SystemInfo
+ * @property {string}
+ */
