@@ -8,12 +8,13 @@ declare global {
   const Toolbox: typeof ToolboxClass;
 }
 
+// @ts-ignore
 Hooks.once('debugger.ready', () => {
   const debuggerAPI = requireDebugger();
   Constants.d = new debuggerAPI(Constants.id, Constants.nameFlat, true, false);
 
   Constants.d.info('Module Information:');
-  Constants.d.info(`Version ${game.modules?.get(Constants.id).version}`);
+  Constants.d.info(`Version ${game.modules?.get(Constants.id)?.version}`);
   Constants.d.info('Library by 🐲 RPG Made Simple');
 
   prepareForAPI(Constants.id, ToolboxClass);
@@ -24,6 +25,7 @@ Hooks.once('debugger.ready', () => {
   ToolboxClass.showcaseModule('Debugger');
   ToolboxClass.showcaseModule(Constants.nameFlat);
 
+  // @ts-ignore
   Hooks.call('toolbox.ready');
 
   Constants.d.info('Ready!');
