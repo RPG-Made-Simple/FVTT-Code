@@ -12,6 +12,23 @@ const options = defineModuleOptions({
     minimum: "13",
     verified: "13.347"
   },
+  language: {
+    path: "./lang",
+    include: [
+      {
+        lang: "en",
+        name: "English",
+      },
+    ],
+  },
+  templates: {
+    path: "./templates",
+    include: ["documentTagsApplication"],
+  },
+  styles: {
+    path: "./styles",
+    include: ["tags"]
+  },
   relationships: {
     requires: [
       {
@@ -36,13 +53,6 @@ const options = defineModuleOptions({
       email: "zotydev@gmail.com",
       url: "https://zoty.dev",
       discord: "zotydev",
-    },
-  ],
-  languagePath: "./lang",
-  languages: [
-    {
-      lang: "en",
-      name: "English",
     },
   ],
   repo: "https://github.com/RPG-Made-Simple/FVTT-Code",

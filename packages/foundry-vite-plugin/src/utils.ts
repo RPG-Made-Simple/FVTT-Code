@@ -85,4 +85,38 @@ export async function copyLangFiles(langPath: string) {
   console.log("lang files copied");
 }
 
+export async function copyTemplateFiles(templatePath: string) {
+  console.log("copying template files...");
 
+  const templateSrc = path.resolve(process.cwd(), templatePath);
+  const templateDest = path.resolve(process.cwd(), "./dist/templates");
+  await fs.mkdir(templateDest, { recursive: true });
+  const files = await fs.readdir(templateSrc);
+
+  for (const file of files) {
+    const srcPath = path.join(templateSrc, file);
+    const destPath = path.join(templateDest, file);
+
+    await fs.copyFile(srcPath, destPath);
+  }
+
+  console.log("template files copied");
+}
+
+export async function copyStyleFiles(stylePath: string) {
+  console.log("copying style files...");
+
+  const styleSrc = path.resolve(process.cwd(), stylePath);
+  const styleDest = path.resolve(process.cwd(), "./dist/styles");
+  await fs.mkdir(styleDest, { recursive: true });
+  const files = await fs.readdir(styleSrc);
+
+  for (const file of files) {
+    const srcPath = path.join(styleSrc, file);
+    const destPath = path.join(styleDest, file);
+
+    await fs.copyFile(srcPath, destPath);
+  }
+
+  console.log("style files copied");
+}

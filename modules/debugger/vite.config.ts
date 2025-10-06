@@ -20,13 +20,6 @@ const options = defineModuleOptions({
       discord: 'zotydev',
     },
   ],
-  languagePath: "./lang",
-  languages: [
-    {
-      lang: 'en',
-      name: 'English',
-    },
-  ],
   repo: 'https://github.com/RPG-Made-Simple/FVTT-Code',
 });
 

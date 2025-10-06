@@ -1,1 +1,27 @@
-{}
+{
+  "tags": {
+    "warnings": {
+      "duplicate": "This tag already exists"
+    },
+    "dialog": {
+      "no": "No",
+      "yes": "Yes"
+    },
+    "editor": {
+      "placeholder": "new tag (press Enter to add)",
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save"
+      }
+    },
+    "applications": {
+      "tags": {
+        "title": "Tags"
+      },
+      "deletion": {
+        "title": "Delete Tag?",
+        "content": "Do you really want to delete the \"$tag\" tag?"
+      }
+    }
+  }
+}

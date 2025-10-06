@@ -13,8 +13,18 @@ export interface SystemOptions {
     recommends?: ModuleRelationship[],
   }
   authors: Author[];
-  languagePath: string;
-  languages: Language[];
+  language?: {
+    path: string,
+    include: Language[],
+  };
+  templates?: {
+    path: string;
+    include: string[],
+  };
+  styles?: {
+    path: string,
+    include: string[],
+  };
   grid: {
     distance: number,
     units: string,

@@ -2,16 +2,35 @@ import { ModuleOptions } from "./options/moduleOptions";
 
 import { promises as fs } from 'fs';
 import path from 'path';
-import { copyFolder, copyLangFiles, deleteFolderRecursive, generateDeclarations } from "./utils";
+import { copyFolder, copyLangFiles, copyStyleFiles, copyTemplateFiles, deleteFolderRecursive, generateDeclarations } from "./utils";
 
 export async function generateModuleBundle(options: ModuleOptions) {
   console.log("generating module.json...");
 
-  const languageData = options.languages.map((lang) => ({
-    lang: lang.lang,
-    name: lang.name,
-    path: `./lang/${lang.lang}.json`,
-  }));
+  let languageData: {lang: string; name: string; path: string}[] = [];
+  if (options.language && options.language.include.length > 0) {
+    options.language.include.map((lang) => {
+      languageData.push({
+        lang: lang.lang,
+        name: lang.name,
+        path: `./lang/${lang.lang}.json`,
+      });
+    });
+  }
+
+  let templateData: string[] = [];
+  if (options.templates && options.templates.include.length > 0) {
+    options.templates.include.map((template) => {
+      templateData.push(`./templates/${template}.hbs`);
+    });
+  }
+
+  let styleData: string[] = [];
+  if (options.styles && options.styles.include.length > 0) {
+    options.styles.include.map((style) => {
+      styleData.push(`./styles/${style}.css`);
+    });
+  }
 
   const structuredData = {
     id: options.id,
@@ -32,6 +51,7 @@ export async function generateModuleBundle(options: ModuleOptions) {
     readme: `${options.repo}/blob/main/modules/${options.id}/README.md`,
     changelog: `${options.repo}/blob/main/modules/${options.id}/CHANGELOG.md`,
     esmodules: ["./module.js"],
+    styles: styleData.length > 0 ? styleData : undefined,
   };
 
   const outDir = path.resolve(process.cwd(), "dist");
@@ -46,7 +66,17 @@ export async function generateModuleBundle(options: ModuleOptions) {
 
   console.log("module.json generated");
 
-  await copyLangFiles(options.languagePath);
+  if (options.language && options.language.include.length > 0) {
+    await copyLangFiles(options.language.path);
+  }
+
+  if (options.templates && options.templates.include.length > 0) {
+    await copyTemplateFiles(options.templates.path);
+  }
+
+  if (options.styles && options.styles.include.length > 0) {
+    await copyStyleFiles(options.styles.path);
+  }
 
   generateDeclarations();
 }

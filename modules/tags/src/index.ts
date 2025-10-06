@@ -1,3 +1,4 @@
+import { DocumentTagsApplication } from "./applications/documentTagsApplication";
 import { Constants } from "./constants";
 import { requireDebugger, requireToolbox } from "./imports"
 
@@ -12,6 +13,8 @@ Hooks.once("toolbox.ready", () => {
     Library by 🐲 RPG Made Simple`);
 
   Constants.t.showcaseModule(Constants.nameFlat);
+
+  new DocumentTagsApplication().render(true);
 
   // @ts-ignore
   Hooks.call(`${Constants.id}.ready`);
