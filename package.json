@@ -12,9 +12,9 @@
     "coverage": "turbo run coverage --continue"
   },
   "devDependencies": {
-    "prettier": "^3.4.2",
-    "turbo": "^2.3.3",
-    "typescript": "^5.7.2"
+    "prettier": "^3.7.4",
+    "turbo": "^2.7.1",
+    "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {

@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
-    "@vue/eslint-config-typescript": "^14.1.4",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-config-turbo": "^2.3.3",
-    "eslint-plugin-prettier": "^5.2.1",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-config-turbo": "^2.7.1",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-unicorn": "^56.0.1",
-    "typescript": "^5.7.2"
+    "typescript": "^5.9.3"
   }
 }

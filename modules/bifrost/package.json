@@ -13,13 +13,13 @@
     "fix": "eslint . --fix && prettier --write ."
   },
   "devDependencies": {
-    "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
+    "@rpgmadesimple/debugger": "workspace:*",
     "@rpgmadesimple/foundry-vite-plugin": "workspace:*",
+    "@rpgmadesimple/toolbox": "workspace:*",
     "@rpgmadesimple/tsconfig": "workspace:*",
     "@rpgmadesimple/utils": "workspace:*",
-    "@rpgmadesimple/debugger": "workspace:*",
-    "@rpgmadesimple/toolbox": "workspace:*",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.4"
+    "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
   }
 }
