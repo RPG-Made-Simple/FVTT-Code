@@ -9,6 +9,7 @@ const options = defineSystemOptions({
   version: "1.0.0",
   socket: false,
   initiative: "1d20",
+  template: "./src/template.json",
   compatibility: {
     minimum: "13",
     verified: "13.351",

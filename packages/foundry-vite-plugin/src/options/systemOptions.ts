@@ -7,6 +7,7 @@ export interface SystemOptions {
   version: string;
   socket?: boolean;
   initiative: string;
+  template: string;
   compatibility: Compatibility;
   relationships: {
     requires?: ModuleRelationship[],

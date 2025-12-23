@@ -68,6 +68,13 @@ export async function generateSystemBundle(options: SystemOptions) {
 
   console.log("system.json generated");
 
+  if (options.template) {
+    const templateSrc = path.resolve(process.cwd(), options.template);
+    const templateDest = path.join(outDir, "template.json");
+    await fs.copyFile(templateSrc, templateDest);
+    console.log("template.json copied");
+  }
+
   if (options.language && options.language.include.length > 0) {
       await copyLangFiles(options.language.path);
     }

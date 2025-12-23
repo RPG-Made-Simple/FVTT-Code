@@ -1,0 +1,28 @@
+{
+  "Actor": {
+    "types": ["character"],
+    "character": {
+      "resources": {
+        "health": { "value": 10, "max": 10 },
+        "power": { "value": 5, "max": 5 }
+      },
+      "attributes": {
+        "strength": 10,
+        "agility": 10,
+        "intellect": 10
+      },
+      "biography": ""
+    }
+  },
+  "Item": {
+    "types": ["weapon", "armor"],
+    "weapon": {
+      "damage": 0,
+      "attackSpeed": 1
+    },
+    "armor": {
+      "defense": 0,
+      "weight": 0
+    }
+  }
+}
