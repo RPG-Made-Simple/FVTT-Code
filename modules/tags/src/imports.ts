@@ -1,10 +1,10 @@
 import { getGame } from "@rpgmadesimple/utils/src/futureProof.ts";
 
-interface DebuggerModule extends Module {
+interface DebuggerModule extends foundry.packages.Module {
   api?: typeof Debugger,
 }
 
-interface ToolboxModule extends Module {
+interface ToolboxModule extends foundry.packages.Module {
   api?: typeof Toolbox,
 }
 

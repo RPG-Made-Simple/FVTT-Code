@@ -16,5 +16,6 @@ Hooks.once('ready', () => {
   dbg.info('Ready!');
   dbg.info('Library by 🐲 RPG Made Simple')
 
+  // @ts-ignore
   Hooks.call('debugger.ready');
 });
