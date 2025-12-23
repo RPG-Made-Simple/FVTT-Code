@@ -11,7 +11,7 @@ const options = defineSystemOptions({
   initiative: "1d20",
   compatibility: {
     minimum: "13",
-    verified: "13.347",
+    verified: "13.351",
   },
   authors: [
     {
@@ -21,13 +21,16 @@ const options = defineSystemOptions({
       discord: "zotydev",
     },
   ],
-  languagePath: "./lang",
-  languages: [
-    {
-      lang: "en",
-      name: "English",
-    },
-  ],
+  relationships: {},
+  language: {
+    path: "./lang",
+    include: [
+      {
+        lang: "en",
+        name: "English",
+      },
+    ],
+  },
   grid: {
     distance: 1.5,
     units: "m",

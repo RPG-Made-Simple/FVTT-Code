@@ -10,7 +10,7 @@ const options = defineModuleOptions({
   library: true,
   compatibility: {
     minimum: '13',
-    verified: '13.347'
+    verified: '13.351'
   },
   relationships: {
     requires: [
