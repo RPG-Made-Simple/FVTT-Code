@@ -2,7 +2,7 @@ import { ModuleOptions } from "./options/moduleOptions";
 
 import { promises as fs } from 'fs';
 import path from 'path';
-import { copyFolder, copyLangFiles, copyStyleFiles, copyTemplateFiles, deleteFolderRecursive, generateDeclarations } from "./utils";
+import { copyAssetFiles, copyFolder, copyLangFiles, copyStyleFiles, copyTemplateFiles, deleteFolderRecursive, generateDeclarations } from "./utils";
 
 export async function generateModuleBundle(options: ModuleOptions) {
   console.log("generating module.json...");
@@ -76,6 +76,10 @@ export async function generateModuleBundle(options: ModuleOptions) {
 
   if (options.styles && options.styles.include.length > 0) {
     await copyStyleFiles(options.styles.path);
+  }
+
+  if (options.assets) {
+    await copyAssetFiles(options.assets.path);
   }
 
   generateDeclarations();

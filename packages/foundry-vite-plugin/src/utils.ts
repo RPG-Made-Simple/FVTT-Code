@@ -120,3 +120,17 @@ export async function copyStyleFiles(stylePath: string) {
 
   console.log("style files copied");
 }
+
+export async function copyAssetFiles(assetsPath: string) {
+  console.log("copying asset files...");
+
+  const assetSrc = path.resolve(process.cwd(), assetsPath);
+  const assetDest = path.resolve(process.cwd(), `./dist/${assetsPath}`);
+
+  try {
+    await copyFolder(assetSrc, assetDest);
+    console.log("asset files copied successfully");
+  } catch (error) {
+    console.error("Error copying assets:", error);
+  }
+}

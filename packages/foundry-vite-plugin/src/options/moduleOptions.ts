@@ -26,6 +26,9 @@ export interface ModuleOptions {
     path: string,
     include: string[],
   };
+  assets?: {
+    path: string,
+  };
   repo: string;
 }
 
