@@ -81,6 +81,28 @@ jobs:
 
           echo "Found module.json at $DIST_PATH/module.json"
 
+      - name: Update module.json for release
+        run: |
+          ODULE="${{ steps.module_info.outputs.module }}"
+          VERSION="${{ steps.module_info.outputs.version }}"
+          TAG="${{ steps.module_info.outputs.tag }}"
+          DIST_PATH="${{ steps.module_data.outputs.dist_path }}"
+
+          cd "$DIST_PATH"
+
+          jq --arg version "$VERSION" \
+             --arg tag "$TAG" \
+             --arg module "$MODULE" \
+             '.version = $version |
+              .manifest = "https://github.com/${{ github.repository }}/releases/download/latest/sounds/module.json" |
+              .download = "https://github.com/${{ github.repository }}/releases/download/\($tag)/\($module).zip"' \
+             module.json > module.json.tmp
+
+          mv module.json.tmp module.json
+
+          echo "Updated module.json with release URLs"
+          cat module.json
+
       - name: Create module ZIP
         run: |
           MODULE="${{ steps.module_info.outputs.module }}"
@@ -113,3 +135,68 @@ jobs:
             ## Module Info
             - **ID**: `${{ steps.module_data.outputs.module_id }}`
             - **Version**: `${{ steps.module_info.outputs.version }}`
+
+      - name: Setup GitHub CLI
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Get latest release-index version
+        id: index_version
+        run: |
+          LATEST_INDEX=$(git tag -l "release-index-v*" | sort -V | tail -n1)
+
+          if [ -z "$LATEST_INDEX" ]; then
+            INDEX_VERSION=1
+            echo "Creating first release-index"
+          else
+            CURRENT_VERSION=$(echo $LATEST_INDEX | grep -oP '\d+$')
+            INDEX_VERSION=$((CURRENT_VERSION + 1))
+            echo "Incrementing from v$CURRENT_VERSION to v$INDEX_VERSION"
+          fi
+
+          INDEX_TAG="release-index-v${INDEX_VERSION}"
+
+          echo "version=$INDEX_VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$INDEX_TAG" >> $GITHUB_OUTPUT
+          echo "previous_tag=$LATEST_INDEX" >> $GITHUB_OUTPUT
+
+          echo "New index tag: $INDEX_TAG"
+
+      - name: Prepare release-index files
+        run: |
+          MODULE="${{ steps.module_info.outputs.module }}"
+          PREVIOUS_TAG="${{ steps.index_version.outputs.previous_tag }}"
+
+          mkdir -p release-index
+
+          if [ -n "$PREVIOUS_TAG" ]; then
+            echo "Downloading previous release-index from $PREVIOUS_TAG"
+
+            gh release view "$PREVIOUS_TAG" --json assets --jq '.assets[].name' | grep '\.json$' | while read asset; do
+              echo "Downloading $asset"
+              gh release download "$PREVIOUS_TAG" -p "$asset" -D release-index/ || true
+            done
+          fi
+
+          echo "Adding/updating ${MODULE}.json"
+          cp "${{ steps.module_data.outputs.dist_path }}/module.json" "release-index/${MODULE}.json"
+
+          echo ""
+          echo "Release Index contents:"
+          ls -1 release-index/*.json 2>/dev/null | while read file; do
+            MODULE_NAME=$(basename "$file" .json)
+            MODULE_VERSION=$(jq -r '.version' "$file")
+            MODULE_TITLE=$(jq -r '.title' "$file")
+            echo "${MODULE_NAME}.json - $MODULE_TITLE v$MODULE_VERSION"
+          done
+
+      - name: Create release-index release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release-index/*.json"
+          tag: ${{ steps.index_version.outputs.tag }}
+          name: "Release Index v${{ steps.index_version.outputs.version }}"
+          body: |
+            # 📚 Release Index v${{ steps.index_version.outputs.version }}
+
+            Updated with: **${{ steps.module_data.outputs.module_title }}** v${{ steps.module_info.outputs.version }}
