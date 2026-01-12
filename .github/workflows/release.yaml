@@ -66,7 +66,7 @@ jobs:
             echo "Error: dist directory not found at $DIST_PATH"
           fi
 
-          if [ ! -d "$DIST_PATH/module.json" ]; then
+          if [ ! -f "$DIST_PATH/module.json" ]; then
             echo "Error: module.json not found at $DIST_PATH"
           fi
 
