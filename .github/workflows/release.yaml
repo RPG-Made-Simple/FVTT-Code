@@ -138,7 +138,7 @@ jobs:
 
       - name: Setup GitHub CLI
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
 
       - name: Get latest release-index version
         id: index_version
