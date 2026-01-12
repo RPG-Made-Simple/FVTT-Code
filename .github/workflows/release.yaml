@@ -110,24 +110,17 @@ jobs:
           MODULE="${{ steps.module_info.outputs.module }}"
           DIST_PATH="${{ steps.module_data.outputs.dist_path }}"
 
-          (cd "$DIST_PATH" && zip -r "../../../${MODULE}.zip" . -x "*.git*")
+          (cd "$DIST_PATH" && zip -r "${MODULE}.zip" . -x "*.git*")
 
-          echo "Created ${MODULE}.zip"
-          ls -lh "${MODULE}.zip"
-
-      - name: Verify ZIP exists
-        run: |
-          MODULE="${{ steps.module_info.outputs.module }}"
-          echo "Current directory: $(pwd)"
-          echo "Looking for: ${MODULE}.zip"
-          ls -lh "${MODULE}.zip" || echo "ZIP not found!"
-          echo "All files in current directory:"
-          ls -lha
+          echo "Created $DIST_PATH/${MODULE}.zip"
+          ls -lh "$DIST_PATH/${MODULE}.zip"
 
       - name: Create module release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "${{ steps.module_info.outputs.module }}.zip,${{ steps.module_data.outputs.dist_path }}/module.json"
+          artifacts: |
+            ${{ steps.module_info.outputs.dist_path }}/${{ steps.module_info.outputs.module }}.zip
+            ${{ steps.module_data.outputs.dist_path }}/module.json
           tag: ${{ steps.module_info.outputs.tag }}
           name: "${{ steps.module_data.outputs.module_title }} v${{ steps.module_info.outputs.version }}"
           makeLatest: false
