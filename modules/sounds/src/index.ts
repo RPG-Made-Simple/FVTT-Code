@@ -2,11 +2,13 @@ import { Constants } from "./constants"
 import { PageFlipEntry } from "./database/objects/pageFlip";
 import { CoinBagEntry } from "./database/objects/coinBag";
 import { CoinsEntry } from "./database/objects/coins";
+import { CrystalEntry } from "./database/objects/crystal";
 
 const database = {
   objects: {
     coinBag: CoinBagEntry,
     coins: CoinsEntry,
+    crystal: CrystalEntry,
     pageFlip: PageFlipEntry,
   }
 };
