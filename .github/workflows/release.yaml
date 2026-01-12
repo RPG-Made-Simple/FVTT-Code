@@ -85,7 +85,7 @@ jobs:
 
       - name: Update module.json for release
         run: |
-          ODULE="${{ steps.module_info.outputs.module }}"
+          MODULE="${{ steps.module_info.outputs.module }}"
           VERSION="${{ steps.module_info.outputs.version }}"
           TAG="${{ steps.module_info.outputs.tag }}"
           DIST_PATH="${{ steps.module_data.outputs.dist_path }}"
@@ -121,7 +121,8 @@ jobs:
         with:
           artifacts: "${{ steps.module_info.outputs.module }}.zip,${{ steps.module_data.outputs.dist_path }}/module.json"
           tag: ${{ steps.module_info.outputs.tag }}
-          name: "${{ steps.module_data.outputs.module_name }} v${{ steps.module_info.outputs.version }}"
+          name: "${{ steps.module_data.outputs.module_title }} v${{ steps.module_info.outputs.version }}"
+          makeLatest: false
           body: |
             # ${{ steps.module_data.outputs.module_title }} v${{ steps.module_info.outputs.version }}
 
@@ -198,6 +199,7 @@ jobs:
           artifacts: "release-index/*.json"
           tag: ${{ steps.index_version.outputs.tag }}
           name: "Release Index v${{ steps.index_version.outputs.version }}"
+          makeLatest: true
           body: |
             # 📚 Release Index v${{ steps.index_version.outputs.version }}
 
