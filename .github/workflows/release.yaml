@@ -110,17 +110,18 @@ jobs:
           MODULE="${{ steps.module_info.outputs.module }}"
           DIST_PATH="${{ steps.module_data.outputs.dist_path }}"
 
-          (cd "$DIST_PATH" && zip -r "../../../${MODULE}.zip" . -x "*.git*")
+          cd "$DIST_PATH"
+          zip -r "$GITHUB_WORKSPACE/${MODULE}.zip" . -x "*.git*"
 
-          echo "Created ${MODULE}.zip"
-          ls -lh "${MODULE}.zip"
+          echo "ZIP criado em: $GITHUB_WORKSPACE/${MODULE}.zip"
 
       - name: Create module release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "${{ steps.module_info.outputs.module }}.zip,${{ steps.module_data.outputs.dist_path }}/module.json"
+          artifacts: "${{ github.workspace }}/${{ steps.module_info.outputs.module }}.zip,${{ steps.module_data.outputs.dist_path }}/module.json"
           tag: ${{ steps.module_info.outputs.tag }}
           name: "${{ steps.module_data.outputs.module_title }} v${{ steps.module_info.outputs.version }}"
+          allowUpdates: true
           makeLatest: false
           body: |
             ${{ steps.module_data.outputs.module_description }}
