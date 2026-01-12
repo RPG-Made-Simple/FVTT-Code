@@ -1,9 +1,13 @@
 import { Constants } from "./constants"
+import { PageFlipEntry } from "./database/objects/pageFlip";
 import { CoinBagEntry } from "./database/objects/coinBag";
+import { CoinsEntry } from "./database/objects/coins";
 
 const database = {
   objects: {
     coinBag: CoinBagEntry,
+    coins: CoinsEntry,
+    pageFlip: PageFlipEntry,
   }
 };
 
@@ -24,5 +28,5 @@ Hooks.once('sequencerReady', () => {
   addPrefix(database, prefix);
 
   // @ts-ignore
-  Sequencer.Database.registerEntries(Constants.name, database);
+  Sequencer.Database.registerEntries(Constants.id, database);
 })

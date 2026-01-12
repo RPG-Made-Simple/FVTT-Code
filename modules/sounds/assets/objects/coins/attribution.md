@@ -6,10 +6,8 @@ License: [Attribution 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 The original file was modified and dismantled as:
 
-- `coin-bag-01.ogg`
-- `coin-bag-02.ogg`
-- `coin-bag-03.ogg`
-- `coin-bag-04.ogg`
-- `coin-bag-05.ogg`
-- `coin-bag-06.ogg`
-- `coin-bag-07.ogg`
+- `coins-01.ogg`
+- `coins-02.ogg`
+- `coins-03.ogg`
+- `coins-04.ogg`
+- `coins-05.ogg`
