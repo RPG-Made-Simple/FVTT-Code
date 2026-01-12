@@ -118,7 +118,9 @@ jobs:
       - name: Create module release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ${{ steps.module_info.outputs.dist_path }}/${{ steps.module_info.outputs.module }}.zip,${{ steps.module_data.outputs.dist_path }}/module.json
+          artifacts: |
+            ${{ steps.module_data.outputs.dist_path }}/${{ steps.module_info.outputs.module }}.zip
+            ${{ steps.module_data.outputs.dist_path }}/module.json
           tag: ${{ steps.module_info.outputs.tag }}
           name: "${{ steps.module_data.outputs.module_title }} v${{ steps.module_info.outputs.version }}"
           makeLatest: false
