@@ -4,8 +4,7 @@ interface WeaponDataSourceData {
 }
 
 interface WeaponDataSource {
-  type: "weapon";
-  system: WeaponDataSourceData;
+  weapon: WeaponDataSourceData;
 }
 
 interface ArmorDataSourceData {
@@ -14,8 +13,7 @@ interface ArmorDataSourceData {
 }
 
 interface ArmorDataSource {
-  type: "armor";
-  system: ArmorDataSourceData;
+  armor: ArmorDataSourceData;
 }
 
 type MyItemDataSource = WeaponDataSource | ArmorDataSource;
@@ -25,8 +23,7 @@ interface WeaponDataPropertiesData extends WeaponDataSourceData {
 }
 
 interface WeaponDataProperties {
-  type: "weapon";
-  system: WeaponDataPropertiesData;
+  weapon: WeaponDataPropertiesData;
 }
 
 interface ArmorDataPropertiesData extends ArmorDataSourceData {
@@ -34,19 +31,7 @@ interface ArmorDataPropertiesData extends ArmorDataSourceData {
 }
 
 interface ArmorDataProperties {
-  type: "armor";
-  system: ArmorDataPropertiesData;
+  armor: ArmorDataPropertiesData;
 }
 
 type MyItemDataProperties = WeaponDataProperties | ArmorDataProperties;
-
-declare global {
-  interface SourceConfig {
-    Item: MyItemDataSource;
-  }
-  interface DataConfig {
-    Item: MyItemDataProperties;
-  }
-}
-
-export {};

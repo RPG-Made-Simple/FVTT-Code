@@ -12,8 +12,7 @@ interface CharacterDataSourceData {
 }
 
 interface CharacterDataSource {
-  type: "character";
-  system: CharacterDataSourceData;
+  character: CharacterDataSourceData;
 }
 
 type MyActorDataSource = CharacterDataSource;
@@ -23,19 +22,7 @@ interface CharacterDataPropertiesData extends CharacterDataSourceData {
 }
 
 interface CharacterDataProperties {
-  type: "character",
-  system: CharacterDataPropertiesData;
+  character: CharacterDataPropertiesData;
 }
 
 type MyActorDataProperties = CharacterDataProperties;
-
-declare global {
-  interface SourceConfig {
-    Actor: MyActorDataSource;
-  }
-  interface DataConfig {
-    Actor: MyActorDataProperties;
-  }
-}
-
-export {};

@@ -8,6 +8,7 @@ services:
     environment:
       - FOUNDRY_HOT_RELOAD=true
       - FOUNDRY_TELEMETRY=false
+      - FOUNDRY_LANGUAGE=pt-BR.pt-BR
     env_file:
       - .env
     ports:

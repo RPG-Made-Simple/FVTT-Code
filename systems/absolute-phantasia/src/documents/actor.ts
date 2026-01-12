@@ -6,12 +6,8 @@ export class AbsolutePhantasiaActor extends Actor {
   override prepareDerivedData(): void {
     const system = this.system;
 
-    if (this.type === "character") { }
-  }
-}
+    if (this.type === "character") {
 
-declare global {
-  interface DocumentClassConfig {
-    Actor: typeof AbsolutePhantasiaActor;
+    }
   }
 }
