@@ -1,0 +1,115 @@
+name: Release Module
+
+on:
+  push:
+    tags:
+      - '*-v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 'latest'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Extract module info from tag
+        id: module_info
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          MODULE=$(echo $TAG | cut -d'-' -f1)
+          VERSION=$(echo $TAG | cut -d'v' -f2)
+
+          echo "module=$MODULE" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Extract module data from dist
+        id: module_data
+        run: |
+          MODULE="${{ steps.module_info.outputs.module }}"
+          DIST_PATH="modules/${MODULE}/dist"
+
+          if [ ! -d "$DIST_PATH" ]; then
+            echo "Error: dist directory not found at $DIST_PATH"
+          fi
+
+          if [ ! -d "$DIST_PATH/module.json" ]; then
+            echo "Error: module.json not found at $DIST_PATH"
+          fi
+
+          MODULE_ID=$(jq -r '.id' "$DIST_PATH/module.json")
+          MODULE_TITLE=$(jq -r '.title' "$DIST_PATH/module.json")
+          MODULE_DESCRIPTION=$(jq -r '.description "$DIST_PATH/module.json")
+
+          echo "module_id=$MODULE_ID" >> $GITHUB_OUTPUT
+          echo "module_title=$MODULE_TITLE" >> $GITHUB_OUTPUT
+          echo "module_description=$MODULE_DESCRIPTION" >> $GITHUB_OUTPUT
+          echo "dist_path=$DIST_PATH" >> $GITHUB_OUTPUT
+
+          echo "Found module.json at $DIST_PATH/module.json"
+
+      - name: Create module ZIP
+        run: |
+          MODULE="${{ steps.module_info.outputs.module }}"
+          DIST_PATH="${{ steps.module_data.outputs.dist_path }}"
+
+          cd "$DIST_PATH"
+          zip -r "../../../${MODULE}.zip" .
+
+          echo "Created ${MODULE}.zip"
+          ls -ln "../../../${MODULE}.zip"
+
+      - name: Create module release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{ steps.module_info.outputs.module }}.zip,${{ steps.module_data.outputs.dist_path }}/module.json"
+          tag: ${{ steps.module_info.outputs.tag }}
+          name: "${{ steps.module_data.outputs.module_name }} v${{ steps.module_info.outputs.version }}"
+          body: |
+            # ${{ steps.module_data.outputs.module_title }} v${{ steps.module_info.outputs.version }}
+
+            ${{ steps.module_data.outputs.module_description }}
+
+            ## Installation
+
+            Use this manifest URL in Foundry VTT:
+            ```
+              https://github.com/${{ github.repository }}/releases/download/${{ steps.module_info.outputs.tag }}/module.json
+            ```
+
+            ## Module Info
+            - **ID**: `${{ steps.module_data.outputs.module_id }}`
+            - **Version**: `${{ steps.module_info.outputs.version }}`

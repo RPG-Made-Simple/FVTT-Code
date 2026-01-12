@@ -47,7 +47,7 @@ export async function generateModuleBundle(options: ModuleOptions) {
     url: options.repo,
     bugs: `${options.repo}/issues`,
     manifest: `${options.repo}/releases/latest/download/${options.id}.json`,
-    download: `${options.repo}/releases/latest/download/${options.id}.zip`,
+    download: `${options.repo}/releases/${options.id}-v${options.version}/download/${options.id}.zip`,
     readme: `${options.repo}/blob/main/modules/${options.id}/README.md`,
     changelog: `${options.repo}/blob/main/modules/${options.id}/CHANGELOG.md`,
     esmodules: ["./module.js"],
