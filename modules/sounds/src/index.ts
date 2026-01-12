@@ -1,6 +1,7 @@
 import { Constants } from "./constants"
 import { PageFlipEntry } from "./database/actions/pageFlip";
 import { PaperTearEntry } from "./database/actions/paperTear";
+import { BookEntry } from "./database/objects/book";
 import { CoinBagEntry } from "./database/objects/coinBag";
 import { CoinsEntry } from "./database/objects/coins";
 import { CrystalEntry } from "./database/objects/crystal";
@@ -11,6 +12,7 @@ const database = {
     pageFlip: PageFlipEntry,
   },
   objects: {
+    book: BookEntry,
     coinBag: CoinBagEntry,
     coins: CoinsEntry,
     crystal: CrystalEntry,
