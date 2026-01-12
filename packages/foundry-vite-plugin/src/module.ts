@@ -2,7 +2,7 @@ import { ModuleOptions } from "./options/moduleOptions";
 
 import { promises as fs } from 'fs';
 import path from 'path';
-import { copyAssetFiles, copyFolder, copyLangFiles, copyStyleFiles, copyTemplateFiles, deleteFolderRecursive, generateDeclarations } from "./utils";
+import { copyAssetFiles, copyFolder, copyLangFiles, copyLicenseFile, copyStyleFiles, copyTemplateFiles, createLockFile, deleteFolderRecursive, generateDeclarations } from "./utils";
 
 export async function generateModuleBundle(options: ModuleOptions) {
   console.log("generating module.json...");
@@ -43,7 +43,7 @@ export async function generateModuleBundle(options: ModuleOptions) {
     languages: languageData,
     compatibility: options.compatibility,
     relationships: options.relationships,
-    license: "./LICENSE.md",
+    license: "./LICENSE",
     url: options.repo,
     bugs: `${options.repo}/issues`,
     manifest: `${options.repo}/releases/latest/download/${options.id}.json`,
@@ -65,6 +65,9 @@ export async function generateModuleBundle(options: ModuleOptions) {
   );
 
   console.log("module.json generated");
+
+  // await createLockFile(options.id);
+  await copyLicenseFile();
 
   if (options.language && options.language.include.length > 0) {
     await copyLangFiles(options.language.path);

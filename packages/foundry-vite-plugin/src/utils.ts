@@ -133,4 +133,30 @@ export async function copyAssetFiles(assetsPath: string) {
   } catch (error) {
     console.error("Error copying assets:", error);
   }
+
+  console.log("assets copied");
+}
+
+export async function copyLicenseFile() {
+  console.log("copying license file...");
+
+  try {
+    await fs.copyFile('./LICENSE', './dist/LICENSE');
+  } catch (error) {
+    console.error("Error copying license file:", error);
+  }
+
+  console.log("license file copied")
+}
+
+export async function createLockFile(id: string) {
+  console.log("creating lock file...");
+
+  try {
+    await fs.writeFile(`./dist/${id}.lock`, '🔒');
+  } catch (error) {
+    console.error("Error creating lock file:", error);
+  }
+
+  console.log("lock file created")
 }
