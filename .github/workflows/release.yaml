@@ -72,7 +72,7 @@ jobs:
 
           MODULE_ID=$(jq -r '.id' "$DIST_PATH/module.json")
           MODULE_TITLE=$(jq -r '.title' "$DIST_PATH/module.json")
-          MODULE_DESCRIPTION=$(jq -r '.description "$DIST_PATH/module.json")
+          MODULE_DESCRIPTION=$(jq -r '.description' "$DIST_PATH/module.json")
 
           echo "module_id=$MODULE_ID" >> $GITHUB_OUTPUT
           echo "module_title=$MODULE_TITLE" >> $GITHUB_OUTPUT
